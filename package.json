@@ -1,0 +1,42 @@
+{
+  "name": "hexon-backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc --noEmit",
+    "start": "tsx src/index.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "devnet:keypair": "tsx scripts/devnet/generate-keypair.ts",
+    "devnet:address": "tsx scripts/devnet/print-address.ts",
+    "devnet:balance": "tsx scripts/devnet/balance.ts",
+    "devnet:airdrop": "tsx scripts/devnet/airdrop-sol.ts",
+    "devnet:sign-sol": "tsx scripts/devnet/sign-sol-transfer.ts",
+    "devnet:sign-usdc": "tsx scripts/devnet/sign-usdc-transfer.ts",
+    "devnet:broadcast": "tsx scripts/devnet/broadcast-signed-tx.ts",
+    "umbra:state": "tsx scripts/umbra/state.ts",
+    "umbra:encrypted-balance": "tsx scripts/umbra/encrypted-balance.ts",
+    "umbra:register": "tsx scripts/umbra/register.ts",
+    "umbra:deposit:dry-run": "tsx scripts/umbra/dry-run-deposit.ts",
+    "umbra:deposit": "tsx scripts/umbra/deposit.ts"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.14.4",
+    "@hono/zod-openapi": "^0.19.8",
+    "@scalar/hono-api-reference": "^0.9.9",
+    "@solana/spl-token": "^0.4.14",
+    "@solana/web3.js": "^1.98.4",
+    "@umbra-privacy/sdk": "^4.0.0",
+    "dotenv": "^17.4.2",
+    "hono": "^4.7.11",
+    "zod": "^3.25.56"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.29",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
+  }
+}
