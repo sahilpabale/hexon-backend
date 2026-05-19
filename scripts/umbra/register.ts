@@ -22,16 +22,16 @@ try {
     anonymous,
     callbacks: {
       userAccountInitialisation: {
-        pre: async () => console.log('Preparing account initialization tx...'),
-        post: async (_tx, sig) => console.log(`Account initialization confirmed: ${sig}`),
+        pre: () => Promise.resolve(void console.log('Preparing account initialization tx...')),
+        post: (_tx: unknown, sig: unknown) => Promise.resolve(void console.log(`Account initialization confirmed: ${String(sig)}`)),
       },
       registerX25519PublicKey: {
-        pre: async () => console.log('Preparing X25519 key registration tx...'),
-        post: async (_tx, sig) => console.log(`X25519 key registration confirmed: ${sig}`),
+        pre: () => Promise.resolve(void console.log('Preparing X25519 key registration tx...')),
+        post: (_tx: unknown, sig: unknown) => Promise.resolve(void console.log(`X25519 key registration confirmed: ${String(sig)}`)),
       },
       registerUserForAnonymousUsage: {
-        pre: async () => console.log('Preparing anonymous commitment registration tx...'),
-        post: async (_tx, sig) => console.log(`Anonymous commitment registration confirmed: ${sig}`),
+        pre: () => Promise.resolve(void console.log('Preparing anonymous commitment registration tx...')),
+        post: (_tx: unknown, sig: unknown) => Promise.resolve(void console.log(`Anonymous commitment registration confirmed: ${String(sig)}`)),
       },
     },
   })

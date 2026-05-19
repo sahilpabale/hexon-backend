@@ -7,12 +7,12 @@ const register = getUserRegistrationFunction(
   {
     rpc: {
       transactionForwarder: {
-        forwardSequentially: async (transactions) => {
+        forwardSequentially: (transactions) => {
           console.log(`Forwarder received ${transactions.length} transaction(s)`)
           console.log(jsonSafe(transactions[0]))
-          return ['DRY_RUN_SIGNATURE']
+          return Promise.resolve(['DRY_RUN_SIGNATURE'])
         },
-        fireAndForget: async () => 'DRY_RUN_SIGNATURE',
+        fireAndForget: () => Promise.resolve('DRY_RUN_SIGNATURE'),
       },
     },
   },
@@ -23,8 +23,8 @@ const signatures = await register({
   anonymous: false,
   callbacks: {
     userAccountInitialisation: {
-      pre: async (...args) => console.log(`pre: ${jsonSafe(args)}`),
-      post: async (...args) => console.log(`post: ${jsonSafe(args)}`),
+      pre: (...args) => Promise.resolve(void console.log(`pre: ${jsonSafe(args)}`)),
+      post: (...args) => Promise.resolve(void console.log(`post: ${jsonSafe(args)}`)),
     },
   },
 })

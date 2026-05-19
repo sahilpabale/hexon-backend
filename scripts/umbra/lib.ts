@@ -61,7 +61,7 @@ export function getDevnetUsdcMintOrThrow() {
 export function jsonSafe(value: unknown) {
   return JSON.stringify(
     value,
-    (_, innerValue) => {
+    (_: string, innerValue: unknown): unknown => {
       if (typeof innerValue === 'bigint') {
         return innerValue.toString()
       }

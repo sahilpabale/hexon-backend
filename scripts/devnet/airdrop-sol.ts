@@ -28,5 +28,6 @@ try {
       message,
       'Try a smaller amount, wait for faucet limits to reset, or fund the printed address from an external devnet faucet.',
     ].join('\n'),
+    { cause: error },
   )
 }

@@ -13,12 +13,12 @@ const deposit = getPublicBalanceToEncryptedBalanceDirectDepositorFunction(
   {
     rpc: {
       transactionForwarder: {
-        forwardSequentially: async (transactions) => {
+        forwardSequentially: (transactions) => {
           console.log(`Forwarder received ${transactions.length} transaction(s)`)
           console.log(jsonSafe(transactions[0]))
-          return ['DRY_RUN_SIGNATURE']
+          return Promise.resolve(['DRY_RUN_SIGNATURE'])
         },
-        fireAndForget: async () => 'DRY_RUN_SIGNATURE',
+        fireAndForget: () => Promise.resolve('DRY_RUN_SIGNATURE'),
       },
     },
     arcium: {
