@@ -1,22 +1,20 @@
 import { getATAIntoETADirectDepositorFunction } from "@umbra-privacy/sdk/deposit";
 import type { IUmbraSigner, SignedTransaction, TransactionSignature } from "@umbra-privacy/sdk";
-import {
-  getDevnetUmbraClient,
-  getDevnetUsdcMintOrThrow,
-  jsonSafe,
-} from "./lib.js";
+import { NATIVE_MINT } from "@solana/spl-token";
+import { getDevnetUmbraClient, jsonSafe } from "./lib.js";
 
 type Address = IUmbraSigner["address"];
 
-const amount = BigInt(process.argv[2] ?? "1");
+// Default: 1_000_000 lamports = 0.001 wSOL
+const amount = BigInt(process.argv[2] ?? "1000000");
 if (amount <= 0n) {
   throw new Error(
-    "Dry-run deposit amount must be a positive integer in base units",
+    "Dry-run deposit amount must be a positive integer in lamports",
   );
 }
 
 const client = await getDevnetUmbraClient();
-const mint = getDevnetUsdcMintOrThrow();
+const mint = NATIVE_MINT.toBase58();
 const deposit = getATAIntoETADirectDepositorFunction(
   { client },
   {
@@ -46,8 +44,8 @@ const deposit = getATAIntoETADirectDepositorFunction(
 console.log(`Umbra network: ${client.network}`);
 console.log(`Umbra program: ${client.networkConfig.programId}`);
 console.log(`Wallet: ${client.signer.address}`);
-console.log(`Mint: ${mint}`);
-console.log(`Amount: ${amount.toString()} base units`);
+console.log(`Mint: ${mint} (wSOL)`);
+console.log(`Amount: ${amount.toString()} lamports`);
 
 const result = await deposit(
   client.signer.address,
