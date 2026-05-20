@@ -1,8 +1,5 @@
 import { getUserRegistrationFunction } from "@umbra-privacy/sdk/registration";
-import type {
-  SignedTransaction,
-  TransactionSignature,
-} from "@umbra-privacy/sdk";
+import type { SignedTransaction, TransactionSignature } from "@umbra-privacy/sdk";
 import { getDevnetUmbraClient, jsonSafe } from "./lib.js";
 
 const client = await getDevnetUmbraClient();

@@ -21,6 +21,10 @@ import {
   UMBRA_MESSAGE_TO_SIGN,
 } from "./services/umbra.js";
 import {
+  buildWrapSolTransaction,
+  buildUnwrapSolTransaction,
+} from "./services/wsol.js";
+import {
   cacheQuote,
   createTx,
   getCachedQuote,
@@ -254,7 +258,7 @@ app.openAPIRegistry.registerComponent("securitySchemes", "bearerAuth", {
   bearerFormat: "Privy access token",
 });
 
-function stubTx(action: string) {
+function _stubTx(action: string) {
   return {
     requestId: crypto.randomUUID(),
     network: getSolanaNetwork(),
@@ -877,6 +881,141 @@ const jupiterSwapBuildHandler: RouteHandler<
   }
 };
 app.openapi(jupiterSwapBuildRoute, jupiterSwapBuildHandler);
+
+const WrapSolBuildRequestSchema = z
+  .object({
+    walletAddress: PublicKeySchema,
+    lamports: z
+      .string()
+      .regex(/^\d+$/)
+      .openapi({ description: "Amount of SOL to wrap in lamports (1 SOL = 1_000_000_000)" }),
+  })
+  .openapi("WrapSolBuildRequest");
+
+const WrapSolBuildResponseSchema = TxBuildResponseSchema.extend({
+  ataAddress: z.string().openapi({ description: "wSOL associated token account address" }),
+}).openapi("WrapSolBuildResponse");
+
+const UnwrapSolBuildRequestSchema = z
+  .object({
+    walletAddress: PublicKeySchema,
+  })
+  .openapi("UnwrapSolBuildRequest");
+
+const wrapSolBuildRoute = createRoute({
+  method: "post",
+  path: "/v1/sol/wrap/build",
+  tags: ["SOL"],
+  security: authSecurity,
+  request: {
+    body: {
+      content: { "application/json": { schema: WrapSolBuildRequestSchema } },
+      required: true,
+    },
+  },
+  responses: {
+    200: {
+      description: "Build a transaction that wraps native SOL into wSOL",
+      content: { "application/json": { schema: WrapSolBuildResponseSchema } },
+    },
+    500: {
+      description: "Build failed",
+      content: { "application/json": { schema: ErrorSchema } },
+    },
+  },
+});
+const wrapSolBuildHandler: RouteHandler<typeof wrapSolBuildRoute> = async (c) => {
+  const body = c.req.valid("json");
+  try {
+    const result = await buildWrapSolTransaction(body.walletAddress, BigInt(body.lamports));
+    const requestId = crypto.randomUUID();
+    createTx({ requestId, action: "sol_wrap", network: getSolanaNetwork() });
+    return c.json(
+      {
+        requestId,
+        network: getSolanaNetwork(),
+        action: "sol_wrap",
+        unsignedTransactionBase64: result.transactionBase64,
+        lastValidBlockHeight: result.lastValidBlockHeight,
+        expiresAt: new Date(Date.now() + 90_000).toISOString(),
+        requiresUserSignature: true as const,
+        broadcastBy: "ios" as const,
+        rpcUrl: getRpcUrl(),
+        warnings: [] as string[],
+        ataAddress: result.ataAddress,
+      },
+      200,
+    );
+  } catch (err) {
+    return c.json(
+      {
+        error: {
+          code: "SOL_WRAP_BUILD_FAILED",
+          message: err instanceof Error ? err.message : "wSOL wrap build failed",
+        },
+      },
+      500,
+    );
+  }
+};
+app.openapi(wrapSolBuildRoute, wrapSolBuildHandler);
+
+const unwrapSolBuildRoute = createRoute({
+  method: "post",
+  path: "/v1/sol/unwrap/build",
+  tags: ["SOL"],
+  security: authSecurity,
+  request: {
+    body: {
+      content: { "application/json": { schema: UnwrapSolBuildRequestSchema } },
+      required: true,
+    },
+  },
+  responses: {
+    200: {
+      description: "Build a transaction that closes the wSOL ATA and reclaims SOL",
+      content: { "application/json": { schema: TxBuildResponseSchema } },
+    },
+    500: {
+      description: "Build failed",
+      content: { "application/json": { schema: ErrorSchema } },
+    },
+  },
+});
+const unwrapSolBuildHandler: RouteHandler<typeof unwrapSolBuildRoute> = async (c) => {
+  const body = c.req.valid("json");
+  try {
+    const result = await buildUnwrapSolTransaction(body.walletAddress);
+    const requestId = crypto.randomUUID();
+    createTx({ requestId, action: "sol_unwrap", network: getSolanaNetwork() });
+    return c.json(
+      {
+        requestId,
+        network: getSolanaNetwork(),
+        action: "sol_unwrap",
+        unsignedTransactionBase64: result.transactionBase64,
+        lastValidBlockHeight: result.lastValidBlockHeight,
+        expiresAt: new Date(Date.now() + 90_000).toISOString(),
+        requiresUserSignature: true as const,
+        broadcastBy: "ios" as const,
+        rpcUrl: getRpcUrl(),
+        warnings: [] as string[],
+      },
+      200,
+    );
+  } catch (err) {
+    return c.json(
+      {
+        error: {
+          code: "SOL_UNWRAP_BUILD_FAILED",
+          message: err instanceof Error ? err.message : "wSOL unwrap build failed",
+        },
+      },
+      500,
+    );
+  }
+};
+app.openapi(unwrapSolBuildRoute, unwrapSolBuildHandler);
 
 app.openapi(
   createRoute({
