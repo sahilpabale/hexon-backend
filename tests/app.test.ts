@@ -1,9 +1,10 @@
 import { describe, expect, it, vi } from "vitest";
 
 vi.mock("../src/services/umbra.js", async () => {
-  const { UMBRA_MESSAGE_TO_SIGN } = await import("@umbra-privacy/sdk");
+  const { masterSeedSchemeCurrent } =
+    await import("@umbra-privacy/sdk/master-seed-schemes");
   return {
-    UMBRA_MESSAGE_TO_SIGN,
+    UMBRA_MESSAGE_TO_SIGN: masterSeedSchemeCurrent.messageToSign,
     buildUmbraRegisterTransactions: vi.fn(),
     buildUmbraShieldTransaction: vi.fn(),
     buildUmbraWithdrawTransaction: vi.fn(),

@@ -1,5 +1,5 @@
-import { getEncryptedBalanceQuerierFunction } from "@umbra-privacy/sdk";
-import type { IUmbraSigner } from "@umbra-privacy/sdk/interfaces";
+import { getEncryptedBalanceQuerierFunction } from "@umbra-privacy/sdk/query";
+import type { IUmbraSigner } from "@umbra-privacy/sdk";
 import {
   getDevnetUmbraClient,
   getDevnetUsdcMintOrThrow,

@@ -10,31 +10,29 @@
 //   7. Backend captures the transaction via a forwarder, encodes it to base64, returns to iOS.
 //   8. iOS calls decodeBackendTransaction to strip the placeholder sig, re-signs with Privy.
 
-import {
-  getUmbraClient,
-  getDefaultMasterSeedGenerator,
-  getUserRegistrationFunction,
-  getPublicBalanceToEncryptedBalanceDirectDepositorFunction,
-  getEncryptedBalanceToPublicBalanceDirectWithdrawerFunction,
-  UMBRA_MESSAGE_TO_SIGN,
-} from "@umbra-privacy/sdk";
-import type { GetUmbraClientDeps } from "@umbra-privacy/sdk";
+import { getUmbraClient } from "@umbra-privacy/sdk";
 import type {
   IUmbraSigner,
   SignableTransaction,
-  SignedMessage,
+  SignedTransaction,
   TransactionForwarder,
-} from "@umbra-privacy/sdk/interfaces";
-import type { SignedTransaction, TransactionSignature } from "@umbra-privacy/sdk/types";
+  TransactionSignature,
+} from "@umbra-privacy/sdk";
+import { getDefaultMasterSeedGenerator } from "@umbra-privacy/sdk/client";
+import type { GetUmbraClientDeps, SignedMessage } from "@umbra-privacy/sdk/client";
+import { getUserRegistrationFunction } from "@umbra-privacy/sdk/registration";
+import { getATAIntoETADirectDepositorFunction } from "@umbra-privacy/sdk/deposit";
+import { getETAIntoATAWithdrawerFunction } from "@umbra-privacy/sdk/withdrawal";
+import { masterSeedSchemeCurrent } from "@umbra-privacy/sdk/master-seed-schemes";
 import { getRpcUrl, getSolanaNetwork, getUsdcMint } from "./balances.js";
 
-export { UMBRA_MESSAGE_TO_SIGN };
+export const UMBRA_MESSAGE_TO_SIGN: string = masterSeedSchemeCurrent.messageToSign;
 
 // Type aliases derived from SDK exports — avoids adding @solana/kit as a direct dep.
 type Address = IUmbraSigner["address"];
 type SignatureBytes = SignedMessage["signature"];
 type U64 = Parameters<
-  ReturnType<typeof getPublicBalanceToEncryptedBalanceDirectDepositorFunction>
+  ReturnType<typeof getATAIntoETADirectDepositorFunction>
 >[2];
 
 // Internal SDK transaction shape accessed during serialization.
@@ -227,7 +225,7 @@ export async function buildUmbraShieldTransaction(
   const client = await buildUmbraClient(walletAddress, iosSignatureBase64);
   const { forwarder, getCaptured } = makeCaptureForwarder();
 
-  const deposit = getPublicBalanceToEncryptedBalanceDirectDepositorFunction(
+  const deposit = getATAIntoETADirectDepositorFunction(
     { client },
     {
       rpc: { transactionForwarder: forwarder },
@@ -273,7 +271,7 @@ export async function buildUmbraWithdrawTransaction(
   const client = await buildUmbraClient(walletAddress, iosSignatureBase64);
   const { forwarder, getCaptured } = makeCaptureForwarder();
 
-  const withdraw = getEncryptedBalanceToPublicBalanceDirectWithdrawerFunction(
+  const withdraw = getETAIntoATAWithdrawerFunction(
     { client },
     {
       rpc: { transactionForwarder: forwarder },

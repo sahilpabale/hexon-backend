@@ -24,8 +24,8 @@ importers:
         specifier: ^1.98.4
         version: 1.98.4(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)
       '@umbra-privacy/sdk':
-        specifier: ^4.0.0
-        version: 4.0.0(@wallet-standard/core@1.1.1)(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@6.0.6)
+        specifier: 5.0.0-rc.0
+        version: 5.0.0-rc.0(@wallet-standard/core@1.1.1)(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@6.0.6)
       dotenv:
         specifier: ^17.4.2
         version: 17.4.2
@@ -1225,21 +1225,16 @@ packages:
     resolution: {integrity: sha512-59UDBZsPD7RTHbr08TXnCWitHZZ8qOsvtYReSP6Ig3jVeY2mYdx1KBnKnpBlm8UQH8U1HFG1AzIgp2R0SCjtWQ==}
     engines: {node: '>=18.0.0'}
 
-  '@umbra-privacy/indexer-proto-gen@2.0.1':
-    resolution: {integrity: sha512-IQW7ua1I5wu346FfSLAllUfciO3iKNzybsFYBCD4wj6R5DMGNrtJq3MoSR3JchRT/UroVFB7J38z3S6r1KNK+Q==}
-    engines: {node: '>=18.0.0'}
-
-  '@umbra-privacy/indexer-read-service-client@2.0.1':
-    resolution: {integrity: sha512-sIlN8TwUBjKUO8ZFE9teGbO3GiqjPMpB2uqlFeF2O7XGNBXkQ5g9PjqNiCBZ8xJOIq8bEJNxUceezj64EAhOjA==}
-    engines: {node: '>=18.0.0'}
-
-  '@umbra-privacy/sdk@4.0.0':
-    resolution: {integrity: sha512-QZtOql8/jutjI4tyoaTbplCPChxYGmFn2qM7BSlmoTtL5uaQT8DskfpgZlzIyUESMa4xYqIxqrQVH+ApdfPnmw==}
+  '@umbra-privacy/sdk@5.0.0-rc.0':
+    resolution: {integrity: sha512-ipV3AAFTnbwx4qc89zA8o8mBm6HO9ewz4q4l9xsPHhamoICC5II143mVbp38tCqYrb+uEuox4VYsIbfcQU+TnA==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       '@wallet-standard/core': '>=1.0.0'
+      snarkjs: ^0.7.6
     peerDependenciesMeta:
       '@wallet-standard/core':
+        optional: true
+      snarkjs:
         optional: true
 
   '@umbra-privacy/umbra-codama@2.0.2':
@@ -3164,24 +3159,15 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  '@umbra-privacy/indexer-proto-gen@2.0.1':
+  '@umbra-privacy/sdk@5.0.0-rc.0(@wallet-standard/core@1.1.1)(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@6.0.6)':
     dependencies:
       '@bufbuild/protobuf': 2.12.0
-
-  '@umbra-privacy/indexer-read-service-client@2.0.1':
-    dependencies:
-      '@bufbuild/protobuf': 2.12.0
-      '@umbra-privacy/indexer-proto-gen': 2.0.1
-
-  '@umbra-privacy/sdk@4.0.0(@wallet-standard/core@1.1.1)(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@6.0.6)':
-    dependencies:
       '@noble/ciphers': 2.2.0
       '@noble/curves': 2.2.0
       '@noble/hashes': 2.2.0
       '@solana/kit': 6.9.0(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@6.0.6)
       '@solana/wallet-standard-features': 1.3.0
       '@umbra-privacy/arcium-codama': 2.0.1(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@6.0.6)
-      '@umbra-privacy/indexer-read-service-client': 2.0.1
       '@umbra-privacy/umbra-codama': 2.0.2(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@6.0.6)
     optionalDependencies:
       '@wallet-standard/core': 1.1.1
