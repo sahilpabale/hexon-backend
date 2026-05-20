@@ -9,14 +9,14 @@ importers:
   .:
     dependencies:
       '@hono/node-server':
-        specifier: ^1.14.4
-        version: 1.19.14(hono@4.12.19)
+        specifier: ^1.19.14
+        version: 1.19.14(hono@4.12.21)
       '@hono/zod-openapi':
-        specifier: ^0.19.8
-        version: 0.19.10(hono@4.12.19)(zod@3.25.76)
+        specifier: ^0.19.10
+        version: 0.19.10(hono@4.12.21)(zod@3.25.76)
       '@scalar/hono-api-reference':
-        specifier: ^0.9.9
-        version: 0.9.48(hono@4.12.19)
+        specifier: ^0.9.48
+        version: 0.9.48(hono@4.12.21)
       '@solana/spl-token':
         specifier: ^0.4.14
         version: 0.4.14(@solana/web3.js@1.98.4(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6))(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@6.0.6)
@@ -24,39 +24,39 @@ importers:
         specifier: ^1.98.4
         version: 1.98.4(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)
       '@umbra-privacy/sdk':
-        specifier: ^4.0.0
-        version: 4.0.0(@wallet-standard/core@1.1.1)(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@6.0.6)
+        specifier: 5.0.0-rc.0
+        version: 5.0.0-rc.0(@wallet-standard/core@1.1.1)(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@6.0.6)
       dotenv:
         specifier: ^17.4.2
         version: 17.4.2
       hono:
-        specifier: ^4.7.11
-        version: 4.12.19
+        specifier: ^4.12.21
+        version: 4.12.21
       zod:
-        specifier: ^3.25.56
+        specifier: ^3.25.76
         version: 3.25.76
     devDependencies:
       '@eslint/js':
         specifier: ^10.0.1
         version: 10.0.1(eslint@10.4.0)
       '@types/node':
-        specifier: ^22.15.29
+        specifier: ^22.19.19
         version: 22.19.19
       eslint:
         specifier: ^10.4.0
         version: 10.4.0
       tsx:
-        specifier: ^4.19.4
-        version: 4.22.2
+        specifier: ^4.22.3
+        version: 4.22.3
       typescript:
-        specifier: ^5.8.3
+        specifier: ^5.9.3
         version: 5.9.3
       typescript-eslint:
         specifier: ^8.59.4
         version: 8.59.4(eslint@10.4.0)(typescript@5.9.3)
       vitest:
         specifier: ^3.2.4
-        version: 3.2.4(@types/node@22.19.19)(lightningcss@1.32.0)(tsx@4.22.2)(yaml@2.9.0)
+        version: 3.2.4(@types/node@22.19.19)(lightningcss@1.32.0)(tsx@4.22.3)(yaml@2.9.0)
 
 packages:
 
@@ -1225,21 +1225,16 @@ packages:
     resolution: {integrity: sha512-59UDBZsPD7RTHbr08TXnCWitHZZ8qOsvtYReSP6Ig3jVeY2mYdx1KBnKnpBlm8UQH8U1HFG1AzIgp2R0SCjtWQ==}
     engines: {node: '>=18.0.0'}
 
-  '@umbra-privacy/indexer-proto-gen@2.0.1':
-    resolution: {integrity: sha512-IQW7ua1I5wu346FfSLAllUfciO3iKNzybsFYBCD4wj6R5DMGNrtJq3MoSR3JchRT/UroVFB7J38z3S6r1KNK+Q==}
-    engines: {node: '>=18.0.0'}
-
-  '@umbra-privacy/indexer-read-service-client@2.0.1':
-    resolution: {integrity: sha512-sIlN8TwUBjKUO8ZFE9teGbO3GiqjPMpB2uqlFeF2O7XGNBXkQ5g9PjqNiCBZ8xJOIq8bEJNxUceezj64EAhOjA==}
-    engines: {node: '>=18.0.0'}
-
-  '@umbra-privacy/sdk@4.0.0':
-    resolution: {integrity: sha512-QZtOql8/jutjI4tyoaTbplCPChxYGmFn2qM7BSlmoTtL5uaQT8DskfpgZlzIyUESMa4xYqIxqrQVH+ApdfPnmw==}
+  '@umbra-privacy/sdk@5.0.0-rc.0':
+    resolution: {integrity: sha512-ipV3AAFTnbwx4qc89zA8o8mBm6HO9ewz4q4l9xsPHhamoICC5II143mVbp38tCqYrb+uEuox4VYsIbfcQU+TnA==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       '@wallet-standard/core': '>=1.0.0'
+      snarkjs: ^0.7.6
     peerDependenciesMeta:
       '@wallet-standard/core':
+        optional: true
+      snarkjs:
         optional: true
 
   '@umbra-privacy/umbra-codama@2.0.2':
@@ -1554,8 +1549,8 @@ packages:
     resolution: {integrity: sha512-XxwI8EOhVQgWp6iDL+3b0r86f4d6AX6zSU55HfB4ydCEuXLXc5FcYeOu+nnGftS4TEju/11rt4KJPTMgbfmv4A==}
     engines: {node: '>=10.13.0'}
 
-  hono@4.12.19:
-    resolution: {integrity: sha512-xa3eYXYXx68XTT4hZ7dRzsXBhaq85ToSrlUJNoR0gwz/1Ap/CNwX47wfvV7pc/xWhjKVVkLT7zBJy8chhNguqQ==}
+  hono@4.12.21:
+    resolution: {integrity: sha512-uV63apnb0kyPtAUwoWgaGh9HyIFcv8lgmzPZSiTBQAFOFGIzka5EZ1dZocmGnn0XdX0+XTqJ6Tqv7selMuGLRQ==}
     engines: {node: '>=16.9.0'}
 
   humanize-ms@1.2.1:
@@ -1773,8 +1768,8 @@ packages:
     resolution: {integrity: sha512-QP88BAKvMam/3NxH6vj2o21R6MjxZUAd6nlwAS/pnGvN9IVLocLHxGYIzFhg6fUQ+5th6P4dv4eW9jX3DSIj7A==}
     engines: {node: '>=12'}
 
-  postcss@8.5.14:
-    resolution: {integrity: sha512-SoSL4+OSEtR99LHFZQiJLkT59C5B1amGO1NzTwj7TT1qCUgUO6hxOvzkOYxD+vMrXBM3XJIKzokoERdqQq/Zmg==}
+  postcss@8.5.15:
+    resolution: {integrity: sha512-FfR8sjd4em2T6fb3I2MwAJU7HWVMr9zba+enmQeeWFfCbm+UOC/0X4DS8XtpUTMwWMGbjKYP7xjfNekzyGmB3A==}
     engines: {node: ^10 || ^12 || >=14}
 
   prelude-ls@1.2.1:
@@ -1876,8 +1871,8 @@ packages:
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
-  tsx@4.22.2:
-    resolution: {integrity: sha512-6w9FwtT8WQqRAyTNR+Z+86kghRqpmOLjXUrBlBT6T+CQGDuIMm0VmAqaFUFBIeKDTGobE6/YSigZYLeomzBaRg==}
+  tsx@4.22.3:
+    resolution: {integrity: sha512-mdoNxBC/cSQObGGVQ5Bpn5i+yv7j68gk3Nfm3wFjcJg3Z0Mix9jzAFfP12prmm5eVGmDKtp0yyArrs0Q+8gZHg==}
     engines: {node: '>=18.0.0'}
     hasBin: true
 
@@ -2256,21 +2251,21 @@ snapshots:
       '@eslint/core': 1.2.1
       levn: 0.4.1
 
-  '@hono/node-server@1.19.14(hono@4.12.19)':
+  '@hono/node-server@1.19.14(hono@4.12.21)':
     dependencies:
-      hono: 4.12.19
+      hono: 4.12.21
 
-  '@hono/zod-openapi@0.19.10(hono@4.12.19)(zod@3.25.76)':
+  '@hono/zod-openapi@0.19.10(hono@4.12.21)(zod@3.25.76)':
     dependencies:
       '@asteasolutions/zod-to-openapi': 7.3.4(zod@3.25.76)
-      '@hono/zod-validator': 0.7.6(hono@4.12.19)(zod@3.25.76)
-      hono: 4.12.19
+      '@hono/zod-validator': 0.7.6(hono@4.12.21)(zod@3.25.76)
+      hono: 4.12.21
       openapi3-ts: 4.5.0
       zod: 3.25.76
 
-  '@hono/zod-validator@0.7.6(hono@4.12.19)(zod@3.25.76)':
+  '@hono/zod-validator@0.7.6(hono@4.12.21)(zod@3.25.76)':
     dependencies:
-      hono: 4.12.19
+      hono: 4.12.21
       zod: 3.25.76
 
   '@humanfs/core@0.19.2':
@@ -2386,10 +2381,10 @@ snapshots:
 
   '@scalar/helpers@0.2.18': {}
 
-  '@scalar/hono-api-reference@0.9.48(hono@4.12.19)':
+  '@scalar/hono-api-reference@0.9.48(hono@4.12.21)':
     dependencies:
       '@scalar/core': 0.3.45
-      hono: 4.12.19
+      hono: 4.12.21
 
   '@scalar/types@0.6.10':
     dependencies:
@@ -3164,24 +3159,15 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  '@umbra-privacy/indexer-proto-gen@2.0.1':
+  '@umbra-privacy/sdk@5.0.0-rc.0(@wallet-standard/core@1.1.1)(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@6.0.6)':
     dependencies:
       '@bufbuild/protobuf': 2.12.0
-
-  '@umbra-privacy/indexer-read-service-client@2.0.1':
-    dependencies:
-      '@bufbuild/protobuf': 2.12.0
-      '@umbra-privacy/indexer-proto-gen': 2.0.1
-
-  '@umbra-privacy/sdk@4.0.0(@wallet-standard/core@1.1.1)(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@6.0.6)':
-    dependencies:
       '@noble/ciphers': 2.2.0
       '@noble/curves': 2.2.0
       '@noble/hashes': 2.2.0
       '@solana/kit': 6.9.0(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@6.0.6)
       '@solana/wallet-standard-features': 1.3.0
       '@umbra-privacy/arcium-codama': 2.0.1(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@6.0.6)
-      '@umbra-privacy/indexer-read-service-client': 2.0.1
       '@umbra-privacy/umbra-codama': 2.0.2(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@6.0.6)
     optionalDependencies:
       '@wallet-standard/core': 1.1.1
@@ -3211,13 +3197,13 @@ snapshots:
       chai: 5.3.3
       tinyrainbow: 2.0.0
 
-  '@vitest/mocker@3.2.4(vite@7.3.3(@types/node@22.19.19)(lightningcss@1.32.0)(tsx@4.22.2)(yaml@2.9.0))':
+  '@vitest/mocker@3.2.4(vite@7.3.3(@types/node@22.19.19)(lightningcss@1.32.0)(tsx@4.22.3)(yaml@2.9.0))':
     dependencies:
       '@vitest/spy': 3.2.4
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
-      vite: 7.3.3(@types/node@22.19.19)(lightningcss@1.32.0)(tsx@4.22.2)(yaml@2.9.0)
+      vite: 7.3.3(@types/node@22.19.19)(lightningcss@1.32.0)(tsx@4.22.3)(yaml@2.9.0)
 
   '@vitest/pretty-format@3.2.4':
     dependencies:
@@ -3564,7 +3550,7 @@ snapshots:
     dependencies:
       is-glob: 4.0.3
 
-  hono@4.12.19: {}
+  hono@4.12.21: {}
 
   humanize-ms@1.2.1:
     dependencies:
@@ -3739,7 +3725,7 @@ snapshots:
 
   picomatch@4.0.4: {}
 
-  postcss@8.5.14:
+  postcss@8.5.15:
     dependencies:
       nanoid: 3.3.12
       picocolors: 1.1.1
@@ -3850,7 +3836,7 @@ snapshots:
 
   tslib@2.8.1: {}
 
-  tsx@4.22.2:
+  tsx@4.22.3:
     dependencies:
       esbuild: 0.28.0
     optionalDependencies:
@@ -3894,13 +3880,13 @@ snapshots:
 
   uuid@8.3.2: {}
 
-  vite-node@3.2.4(@types/node@22.19.19)(lightningcss@1.32.0)(tsx@4.22.2)(yaml@2.9.0):
+  vite-node@3.2.4(@types/node@22.19.19)(lightningcss@1.32.0)(tsx@4.22.3)(yaml@2.9.0):
     dependencies:
       cac: 6.7.14
       debug: 4.4.3
       es-module-lexer: 1.7.0
       pathe: 2.0.3
-      vite: 7.3.3(@types/node@22.19.19)(lightningcss@1.32.0)(tsx@4.22.2)(yaml@2.9.0)
+      vite: 7.3.3(@types/node@22.19.19)(lightningcss@1.32.0)(tsx@4.22.3)(yaml@2.9.0)
     transitivePeerDependencies:
       - '@types/node'
       - jiti
@@ -3915,26 +3901,26 @@ snapshots:
       - tsx
       - yaml
 
-  vite@7.3.3(@types/node@22.19.19)(lightningcss@1.32.0)(tsx@4.22.2)(yaml@2.9.0):
+  vite@7.3.3(@types/node@22.19.19)(lightningcss@1.32.0)(tsx@4.22.3)(yaml@2.9.0):
     dependencies:
       esbuild: 0.27.7
       fdir: 6.5.0(picomatch@4.0.4)
       picomatch: 4.0.4
-      postcss: 8.5.14
+      postcss: 8.5.15
       rollup: 4.60.4
       tinyglobby: 0.2.16
     optionalDependencies:
       '@types/node': 22.19.19
       fsevents: 2.3.3
       lightningcss: 1.32.0
-      tsx: 4.22.2
+      tsx: 4.22.3
       yaml: 2.9.0
 
-  vitest@3.2.4(@types/node@22.19.19)(lightningcss@1.32.0)(tsx@4.22.2)(yaml@2.9.0):
+  vitest@3.2.4(@types/node@22.19.19)(lightningcss@1.32.0)(tsx@4.22.3)(yaml@2.9.0):
     dependencies:
       '@types/chai': 5.2.3
       '@vitest/expect': 3.2.4
-      '@vitest/mocker': 3.2.4(vite@7.3.3(@types/node@22.19.19)(lightningcss@1.32.0)(tsx@4.22.2)(yaml@2.9.0))
+      '@vitest/mocker': 3.2.4(vite@7.3.3(@types/node@22.19.19)(lightningcss@1.32.0)(tsx@4.22.3)(yaml@2.9.0))
       '@vitest/pretty-format': 3.2.4
       '@vitest/runner': 3.2.4
       '@vitest/snapshot': 3.2.4
@@ -3952,8 +3938,8 @@ snapshots:
       tinyglobby: 0.2.16
       tinypool: 1.1.1
       tinyrainbow: 2.0.0
-      vite: 7.3.3(@types/node@22.19.19)(lightningcss@1.32.0)(tsx@4.22.2)(yaml@2.9.0)
-      vite-node: 3.2.4(@types/node@22.19.19)(lightningcss@1.32.0)(tsx@4.22.2)(yaml@2.9.0)
+      vite: 7.3.3(@types/node@22.19.19)(lightningcss@1.32.0)(tsx@4.22.3)(yaml@2.9.0)
+      vite-node: 3.2.4(@types/node@22.19.19)(lightningcss@1.32.0)(tsx@4.22.3)(yaml@2.9.0)
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 22.19.19
